@@ -1,0 +1,5 @@
+#The following are stored as ENV variables via Figaro
+
+MAIL_HOST:
+SENDMAIL_USERNAME: 
+SENDMAIL_PASSWORD: 
