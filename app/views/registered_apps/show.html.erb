@@ -1,0 +1,7 @@
+
+<h1>Registered App - <%= @registered_app.name %> </h1>
+<br/>
+<h3>URL: <%= @registered_app.url %>  </h3>
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'Return to My Apps', registered_apps_path %> - <%= link_to 'Delete this App', registered_app_path(@registered_app), method: :delete %>

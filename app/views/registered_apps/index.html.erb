@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+ 
+<h1>Listing <%= current_user.email %>'s Registered Apps</h1>
+<br/><%= link_to "Add a New App" , new_registered_app_path, class: 'btn btn-success' %>
+<br/>
+<br/>
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @registered_apps.each do |registered_app| %>
+      <tr>
+        <td><%= link_to "#{registered_app.name} - #{registered_app.url}" , registered_app_path(registered_app) %></td>
+        <td><%#= link_to 'Edit', edit_user_registered_app_path(registered_app) %></td>
+        <td><%#= link_to 'Destroy', user_registered_app, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<!--<#%= link_to 'New Registered app', new_registered_app_path %>-->
