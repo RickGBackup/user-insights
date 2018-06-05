@@ -9,7 +9,7 @@ RSpec.describe RegisteredAppsController, type: :controller do
       #create and sign-in a confirmed user
       @user1 = create(:user)
       sign_in @user1
-      @registered_app = create(:registered_app, user: @user1)
+      @registered_app1 = create(:registered_app, user: @user1)
     end
 
     describe "GET #index" do
@@ -43,41 +43,41 @@ RSpec.describe RegisteredAppsController, type: :controller do
     
     describe '#POST Create' do
       it 'assigns the new app to @registered_app' do
-        post :create, registered_app: {url: "http://www.example.com"}
+        post :create, registered_app: {url: "http://www.domain.com", name: "Test App"}
         expect(assigns(:registered_app)).to eq RegisteredApp.last
       end
       
       it 'redirects to the new app' do
-        post :create, registered_app: {url: "http://www.example.com"}
+        post :create, registered_app: {url: "http://www.domain.com", name: "Test App"}
         expect(response).to redirect_to RegisteredApp.last
       end
       
       it 'increases the RegisteredApp count by 1' do
-        expect{ post :create, registered_app: {url: "http://www.example.com"} }.to change(RegisteredApp,:count).by(1)
+        expect{ post :create, registered_app: {url: "http://www.domain.com", name: "Test App"} }.to change(RegisteredApp,:count).by(1)
       end
     end
     
     describe "GET #show" do
       it "returns http success" do
-         get :show, id: @registered_app.id
+         get :show, id: @registered_app1.id
         expect(response).to have_http_status(:success)
       end
       
       it "renders the #show view" do
-        get :show, id: @registered_app.id
+        get :show, id: @registered_app1.id
         expect(response).to render_template :show
       end
     end
     
     describe "DELETE destroy" do
       it "deletes the registered app" do
-        delete :destroy, id: @registered_app.id
-        count = RegisteredApp.where({id: @registered_app.id}).size
+        delete :destroy, id: @registered_app1.id
+        count = RegisteredApp.where({id: @registered_app1.id}).size
         expect(count).to eq 0
       end
       
       it "returns http redirect" do
-        delete :destroy, id: @registered_app.id
+        delete :destroy, id: @registered_app1.id
         expect(response).to redirect_to root_path
       end
     end

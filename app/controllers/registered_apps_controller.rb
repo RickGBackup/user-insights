@@ -12,6 +12,7 @@ class RegisteredAppsController < ApplicationController
 
   #GET /registered_apps/1
   def show
+    @events = @registered_app.events.group_by(&:name)
     @user = @registered_app.user
     if current_user != @user 
       flash[:alert] = "You may only view your own registered apps"
@@ -32,7 +33,6 @@ class RegisteredAppsController < ApplicationController
   def create
     @registered_app = RegisteredApp.new(registered_app_params)
     @registered_app.user = current_user
-    
     if @registered_app.save
       redirect_to @registered_app, notice: 'Registered app was successfully created.'
     else
