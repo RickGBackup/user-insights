@@ -12,8 +12,10 @@ class RegisteredAppsController < ApplicationController
 
   #GET /registered_apps/1
   def show
-    @events = @registered_app.events.group_by(&:name)
+    @events_by_name = @registered_app.events.group(:name)
+    @events_by_time = @registered_app.events.group_by_minute(:created_at)
     @user = @registered_app.user
+    
     if current_user != @user 
       flash[:alert] = "You may only view your own registered apps"
       redirect_to root_path

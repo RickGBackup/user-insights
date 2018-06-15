@@ -1,12 +1,10 @@
 
-<h1>Registered App - <%= @registered_app.name %> </h1>
+<h1> <%= @registered_app.name %> </h1>
 <br/>
 <h3>URL: <%= @registered_app.url %>  </h3>
 <h3>Events </h3>
-<ul>
-<% @events.each do |event, instances| %>
-<li><%= "#{event} - #{instances.count}"%></li>
-<% end %>
-</ul>
 
+<%= pie_chart @events_by_name.count %>
+<br/>
+<%= line_chart @events_by_time.count %>
 <%= link_to 'Return to My Apps', registered_apps_path %> - <%= link_to 'Delete this App', registered_app_path(@registered_app), method: :delete %>
